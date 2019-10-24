@@ -14,6 +14,7 @@
 <form class="ns" style="padding-top:30px">
 	<a href="<c:url value='/view/bindAccount'/>" class="form_button" style="padding:8px;font: 13.3333px Arial;margin-left: 15px;border:1px solid;height:33px;cursor: pointer; width:80px;background:#269CE9;color:#FFF">绑定用户</a>
 	<a href="<c:url value='/view/addressBook'/>" class="form_button" style="padding:8px;font: 13.3333px Arial;margin-left: 15px;border:1px solid;height:33px;cursor: pointer; width:80px;background:#269CE9;color:#FFF">通讯录</a>
+	<a href="<c:url value='/view/crm'/>" class="form_button" style="padding:8px;font: 13.3333px Arial;margin-left: 15px;border:1px solid;height:33px;cursor: pointer; width:80px;background:#269CE9;color:#FFF">CRM</a>
 </form>
 </body>
 </html>

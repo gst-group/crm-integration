@@ -19,15 +19,15 @@
     
 	<aop:config> 
 		 <aop:aspect ref="accessTokenExpiredExceptionAspect" order="0">
-		   	<aop:pointcut id="aaaManagerPointcut" expression="execution(* com.facishare.open.demo.manager.AAAManager.*(..))" />
+		   	<aop:pointcut id="bindAccountManagerPointcut" expression="execution(* com.facishare.open.demo.manager.BindAccountManager.*(..))" />
 	        <aop:pointcut id="addressBookManagerPointcut" expression="execution(* com.facishare.open.demo.manager.AddressBookManager.*(..))" />
             <aop:pointcut id="messageManagerPointcut" expression="execution(* com.facishare.open.demo.manager.MessageManager.*(..))" />
             
-            <aop:after-returning pointcut-ref="aaaManagerPointcut" method="afterReturning" returning="result"/>
+            <aop:after-returning pointcut-ref="bindAccountManagerPointcut" method="afterReturning" returning="result"/>
             <aop:after-returning pointcut-ref="addressBookManagerPointcut" method="afterReturning" returning="result"/>
             <aop:after-returning pointcut-ref="messageManagerPointcut" method="afterReturning" returning="result"/>
             
-			<aop:after-throwing  pointcut-ref="aaaManagerPointcut" method="afterThrowing" throwing="e"/>
+			<aop:after-throwing  pointcut-ref="bindAccountManagerPointcut" method="afterThrowing" throwing="e"/>
 			<aop:after-throwing  pointcut-ref="addressBookManagerPointcut" method="afterThrowing" throwing="e"/>
 			<aop:after-throwing  pointcut-ref="messageManagerPointcut" method="afterThrowing" throwing="e"/>
 			

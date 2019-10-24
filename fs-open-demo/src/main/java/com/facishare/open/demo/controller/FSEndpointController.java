@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.facishare.open.demo.beans.AppReqParmVO;
 import com.facishare.open.demo.beans.results.OpenUserIdResult;
 import com.facishare.open.demo.exception.AccessTokenException;
-import com.facishare.open.demo.manager.AAAManager;
+import com.facishare.open.demo.manager.BindAccountManager;
 import com.facishare.open.demo.utils.Configuration;
 import com.facishare.open.demo.utils.Constants;
 import com.facishare.open.demo.utils.OpenAPIUtils;
@@ -30,7 +30,7 @@ public class FSEndpointController {
     private Configuration configuration;
 
     @Autowired
-    private AAAManager aaaManager;
+    private BindAccountManager bindAccountManager;
 
     /**
      * 开平APP跳转或者Web跳转到企业应用入口处理方法
@@ -77,7 +77,7 @@ public class FSEndpointController {
         // 通过 code 获取跳转人员信息
         OpenUserIdResult openUserIdResult = null;
         try {
-            openUserIdResult = aaaManager.getOpenUserId(appReqParmVO.getCode());
+            openUserIdResult = bindAccountManager.getOpenUserId(appReqParmVO.getCode());
             session.setAttribute(Constants.SESSION_CURRENT_OPEN_USER_ID, openUserIdResult.getOpenUserId());
         } catch (AccessTokenException e) {
             LOG.error("access token error, details:", e);

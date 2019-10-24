@@ -28,8 +28,8 @@ public class AppViewController {
         }
 
         model.put("appId", configuration.getAppId());
-        model.put("fsRegisterUrl", "aaa/register");
-        model.put("fsLoginUrl", "aaa/login");
+        model.put("fsRegisterUrl", "bindAccount/register");
+        model.put("fsLoginUrl", "bindAccount/login");
         model.put("fsAuthorizeUrl", configuration.getFsAuthorizeUrl());
 
         session.setAttribute("tempState", sb.toString());

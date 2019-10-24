@@ -8,12 +8,12 @@ import com.facishare.open.demo.beans.args.OpenUserIdArg;
 import com.facishare.open.demo.beans.results.BindAccountResult;
 import com.facishare.open.demo.beans.results.OpenUserIdResult;
 import com.facishare.open.demo.exception.AccessTokenException;
-import com.facishare.open.demo.manager.AAAManager;
+import com.facishare.open.demo.manager.BindAccountManager;
 import com.facishare.open.demo.manager.AccessTokenManager;
 import com.facishare.open.demo.utils.OpenAPIUtils;
 
-@Service("aaaManager")
-public class AAAManagerImpl implements AAAManager {
+@Service("bindAccountManager")
+public class BindAccountManagerImpl implements BindAccountManager {
 
     @Autowired
     private AccessTokenManager accessTokenManager;

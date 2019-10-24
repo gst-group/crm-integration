@@ -13,7 +13,7 @@ FSEndpointController.handle()方法
 FSCallbackController.decode();
 
 3.第三方应用跳转纷享登录/注册成功后接收身份态进行账号绑定的入口
-AAAController.login()、AAAController.register();
+BindAccountController.login()、BindAccountController.register();
 
 4.通过openUserId 换取成员信息的入口
 AddressBookController.getUserInfo();

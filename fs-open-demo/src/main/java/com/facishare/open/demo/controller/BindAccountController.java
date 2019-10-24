@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.facishare.open.demo.beans.results.BindAccountResult;
 import com.facishare.open.demo.beans.results.OpenUserIdResult;
 import com.facishare.open.demo.exception.AccessTokenException;
-import com.facishare.open.demo.manager.AAAManager;
+import com.facishare.open.demo.manager.BindAccountManager;
 import com.facishare.open.demo.utils.Constants;
 
 /**
@@ -24,13 +24,13 @@ import com.facishare.open.demo.utils.Constants;
  * @date 2016年5月3日
  */
 @Controller
-@RequestMapping("/aaa")
-public class AAAController {
+@RequestMapping("/bindAccount")
+public class BindAccountController {
 
-    private static final Logger LOG = LoggerFactory.getLogger(AAAController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BindAccountController.class);
 
     @Autowired
-    private AAAManager aaaManager;
+    private BindAccountManager bindAccountManager;
 
     /**
      * 开平重定向进行调用(回调接口) 浏览器跳转到注册页面处理完后的回调入口
@@ -63,7 +63,7 @@ public class AAAController {
         // 通过 code 获取跳转人员信息
         OpenUserIdResult openUserIdResult;
         try {
-            openUserIdResult = aaaManager.getOpenUserId(code);
+            openUserIdResult = bindAccountManager.getOpenUserId(code);
             session.setAttribute(Constants.SESSION_CURRENT_OPEN_USER_ID, openUserIdResult.getOpenUserId());
         } catch (AccessTokenException e) {
             LOG.error("access token error, details:", e);
@@ -83,7 +83,7 @@ public class AAAController {
 
         BindAccountResult bindAccountResult = null;
         try {
-            bindAccountResult = aaaManager.bindAccount(openUserIdResult.getOpenUserId(), appAccount);
+            bindAccountResult = bindAccountManager.bindAccount(openUserIdResult.getOpenUserId(), appAccount);
         } catch (AccessTokenException e) {
             bindAccountResult = new BindAccountResult();
             bindAccountResult.setErrorCode(e.getCode());
@@ -127,7 +127,7 @@ public class AAAController {
         // 通过 code 获取跳转人员信息
         OpenUserIdResult openUserIdResult = null;
         try {
-            openUserIdResult = aaaManager.getOpenUserId(code);
+            openUserIdResult = bindAccountManager.getOpenUserId(code);
             session.setAttribute(Constants.SESSION_CURRENT_OPEN_USER_ID, openUserIdResult.getOpenUserId());
         } catch (AccessTokenException e) {
             LOG.error("access token error, details:", e);
@@ -148,5 +148,37 @@ public class AAAController {
 
         return view;
     }
+    
+    
+    @RequestMapping("/loginFromApplication")
+    public String login(String code, HttpSession session, Map<String, Object> model) {
+        String view = "crm";
 
+        if (StringUtils.isBlank(code)) {
+            model.put("message", "请求参数不完整");
+            return view;
+        }
+
+        // 通过 code 获取跳转人员信息
+        OpenUserIdResult openUserIdResult = null;
+        try {
+            openUserIdResult = bindAccountManager.getOpenUserId(code);
+            session.setAttribute(Constants.SESSION_CURRENT_OPEN_USER_ID, openUserIdResult.getOpenUserId());
+        } catch (AccessTokenException e) {
+            LOG.error("access token error, details:", e);
+            openUserIdResult = new OpenUserIdResult();
+            openUserIdResult.setErrorCode(e.getCode());
+            openUserIdResult.setErrorMessage(e.getMessage());
+        }
+
+        if (openUserIdResult.getErrorCode() != 0) {
+            model.put("message", "获取openUserId错误：errcode=" + openUserIdResult.getErrorCode() + "errmsg="
+                    + openUserIdResult.getErrorMessage());
+            return view;
+        }
+
+        model.put("openUser", openUserIdResult);
+
+        return view;
+    }
 }

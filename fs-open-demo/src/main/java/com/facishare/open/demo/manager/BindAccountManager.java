@@ -9,7 +9,7 @@ import com.facishare.open.demo.exception.AccessTokenException;
  * @author gaoshengbo
  *
  */
-public interface AAAManager {
+public interface BindAccountManager {
 
     /**
      * 根据code获取纷享开放平台openUserId
