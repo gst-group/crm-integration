@@ -1,6 +1,7 @@
 package com.facishare.open.demo.manager;
 
 import com.facishare.open.demo.beans.results.CorpUserMapResult;
+import com.facishare.open.demo.beans.results.CrmQueryResult;
 import com.facishare.open.demo.beans.results.Department;
 import com.facishare.open.demo.beans.results.DeptAddResult;
 import com.facishare.open.demo.beans.results.DeptListResult;
@@ -17,6 +18,6 @@ import com.facishare.open.demo.exception.AccessTokenException;
 public interface CrmManager {
 
  
-    public UserResult getCustomerAccounts(String openUserId) throws AccessTokenException;
+    public CrmQueryResult getCustomerAccounts(String openUserId) throws AccessTokenException;
 
 }

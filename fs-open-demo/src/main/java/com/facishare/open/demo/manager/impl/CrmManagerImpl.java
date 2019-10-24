@@ -8,11 +8,14 @@ import org.springframework.stereotype.Service;
 
 import com.facishare.open.demo.beans.CorpAccessToken;
 import com.facishare.open.demo.beans.EmployeeVO;
+import com.facishare.open.demo.beans.args.CrmQueryArg;
 import com.facishare.open.demo.beans.args.DeptAddModifyArg;
 import com.facishare.open.demo.beans.args.DeptListArg;
 import com.facishare.open.demo.beans.args.DeptUserListArg;
 import com.facishare.open.demo.beans.args.UserInfoArg;
+import com.facishare.open.demo.beans.args.CrmQueryArg.SearchQuery;
 import com.facishare.open.demo.beans.results.CorpUserMapResult;
+import com.facishare.open.demo.beans.results.CrmQueryResult;
 import com.facishare.open.demo.beans.results.Department;
 import com.facishare.open.demo.beans.results.DeptAddResult;
 import com.facishare.open.demo.beans.results.DeptListResult;
@@ -36,13 +39,17 @@ public class CrmManagerImpl implements CrmManager {
    ;
 
     @Override
-    public UserResult getCustomerAccounts(String openUserId) throws AccessTokenException{
-        UserInfoArg arg = new UserInfoArg();
+    public CrmQueryResult getCustomerAccounts(String openUserId) throws AccessTokenException{
+        SearchQuery searchQuery=new SearchQuery();
+        CrmQueryArg arg = new CrmQueryArg();
         CorpAccessToken token = accessTokenManager.getCorpAccessToken();
         arg.setCorpAccessToken(token.getCorpAccessToken());
         arg.setCorpId(token.getCorpId());
+        arg.setCurrentOpenUserId(openUserId);
+        arg.setApiName("AccountObj");
+        arg.setSearchQuery(searchQuery);
 
-        return OpenAPIUtils.getUserInfo(arg);
+        return OpenAPIUtils.queryCrmData(arg);
     }
 
 }
