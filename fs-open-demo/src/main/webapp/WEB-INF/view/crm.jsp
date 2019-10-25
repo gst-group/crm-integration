@@ -19,6 +19,9 @@
 		style="padding: 8px; font: 13.3333px Arial; margin-left: 15px; border: 1px solid; height: 33px; cursor: pointer; width: 150px; background: #269CE9; color: #FFF"
 		value="获取客户列表" />
 	<br />
+	<input type="button" id="btnClientV1" class="form_button"
+		style="padding: 8px; font: 13.3333px Arial; margin-left: 15px; border: 1px solid; height: 33px; cursor: pointer; width: 150px; background: #269CE9; color: #FFF"
+		value="获取客户列表V1" />
 	<div style="border: 1px solid #D8D8B2; background-color: #EEE; padding: 10px">
 		<div id="output" style="display: block; word-break: break-all; word-wrap: break-word;"></div>
 	</div>
@@ -64,7 +67,12 @@
 				}), getClientsHandler);
 			});
 
-
+			$("#btnClientV1").click(function () {
+				var url = getContextPath() + '/crm/getCustomerAccountsV1';
+				ajaxAsyncGet(url+"?" + $.param({
+					openUserId: openUserId
+				}), getClientsHandler);
+			});
 		})
 
 

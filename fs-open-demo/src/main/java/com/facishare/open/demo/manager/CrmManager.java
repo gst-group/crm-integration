@@ -19,5 +19,7 @@ public interface CrmManager {
 
  
     public CrmQueryResult getCustomerAccounts(String openUserId) throws AccessTokenException;
+    
+    public CrmQueryResult getCustomerAccountsV1(String openUserId) throws AccessTokenException;
 
 }

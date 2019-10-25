@@ -1,6 +1,9 @@
 package com.facishare.open.demo.utils.v2;
 
 
+import com.facishare.open.demo.beans.HttpResponseMessageVO;
+import com.facishare.open.demo.beans.args.Arg;
+import com.facishare.open.demo.beans.args.v2.CrmQueryArg;
 import com.facishare.open.demo.beans.args.v2.CrmQueryArg;
 import com.facishare.open.demo.beans.results.AppTokenResult;
 import com.facishare.open.demo.beans.results.BaseResult;
@@ -19,18 +22,14 @@ import com.facishare.open.demo.beans.results.Result;
 import com.facishare.open.demo.beans.results.TextMsgResult;
 import com.facishare.open.demo.beans.results.UserResult;
 import com.facishare.open.demo.exception.BaseException;
+import com.facishare.open.demo.utils.Constants;
+import com.facishare.open.demo.utils.HttpTookit;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.gson.Gson;
 
-/**
- * 开放平台Api调用的工具类
- * 
- * @author huanghp
- * @date 2015年8月28日
- */
 public class OpenAPIUtils {
 
     private static final Logger LOG = LoggerFactory.getLogger(OpenAPIUtils.class);
@@ -45,7 +44,7 @@ public class OpenAPIUtils {
      * CRM查询列表 元数据接口
      */
     public static CrmQueryResult queryCrmData(CrmQueryArg arg) {
-        String url = prefix + "/cgi/crm/data/query";
+        String url = prefix + "/cgi/crm/v2/data/query";
         return doPost(url, arg, CrmQueryResult.class);
     }
 

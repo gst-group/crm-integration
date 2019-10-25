@@ -45,11 +45,11 @@ public class QueryData{
         private int offset = 0;
 
         //获取数据条数，取最大值1000
-        private int limit = 500;
+        private int limit = 20;
 
-        private DataProjection dataProjection;
+        private DataProjection fieldProjection;
 
-        private List<RangeCondition> rangeConditions;
+        private List<Filter> filters;
 
         private List<Order> orders;
 
@@ -69,20 +69,20 @@ public class QueryData{
             this.limit = limit;
         }
 
-        public DataProjection getDataProjection() {
-            return dataProjection;
+        public DataProjection getFieldProjection() {
+            return fieldProjection;
         }
 
-        public void setDataProjection(DataProjection dataProjection) {
-            this.dataProjection = dataProjection;
+        public void setFieldProjection(DataProjection fieldProjection) {
+            this.fieldProjection = fieldProjection;
         }
 
-        public List<RangeCondition> getRangeConditions() {
-            return rangeConditions;
+        public List<Filter> getFilters() {
+            return filters;
         }
 
-        public void setRangeConditions(List<RangeCondition> rangeConditions) {
-            this.rangeConditions = rangeConditions;
+        public void setFilters(List<Filter> filters) {
+            this.filters = filters;
         }
 
         public List<Order> getOrders() {
@@ -98,8 +98,8 @@ public class QueryData{
             return MoreObjects.toStringHelper(this)
                     .add("offset", offset)
                     .add("limit", limit)
-                    .add("dataProjection", dataProjection)
-                    .add("rangeConditions", rangeConditions)
+                    .add("fieldProjection", fieldProjection)
+                    .add("filters", filters)
                     .add("orders", orders)
                     .toString();
         }
@@ -123,7 +123,7 @@ public class QueryData{
         }
     }
 
-    public static class RangeCondition{
+    public static class Filter{
         private String fieldName = "last_modified_time";
 
         private Long from;
@@ -190,32 +190,32 @@ public class QueryData{
 
     public static class Order{
         //降序
-        private boolean ascending = false;
+        private boolean isAsc = false;
 
         //字段,默认按照最后更新时间排序
-        private String field = "last_modified_time";
+        private String fieldName = "last_modified_time";
 
-        public boolean isAscending() {
-            return ascending;
+        public boolean getIsAsc() {
+            return isAsc;
         }
 
-        public void setAscending(boolean ascending) {
-            this.ascending = ascending;
+        public void setIsAsc(boolean isAsc) {
+            this.isAsc = isAsc;
         }
 
-        public String getField() {
-            return field;
+        public String getFieldName() {
+            return fieldName;
         }
 
-        public void setField(String field) {
-            this.field = field;
+        public void setFieldName(String fieldName) {
+            this.fieldName = fieldName;
         }
 
         @Override
         public String toString() {
             return MoreObjects.toStringHelper(this)
-                    .add("ascending", ascending)
-                    .add("field", field)
+                    .add("isAsc", isAsc)
+                    .add("fieldName", fieldName)
                     .toString();
         }
     }

@@ -51,5 +51,21 @@ public class CrmController {
 
         return result;
     }
+    
+    @RequestMapping(value = "getCustomerAccountsV1", method = RequestMethod.GET)
+    public CrmQueryResult getCustomerAccountsV1(String openUserId) {
+        CrmQueryResult result = null;
+
+        try {
+            result = crmManager.getCustomerAccounts(openUserId);
+        } catch (AccessTokenException e) {
+            LOG.error("getCustomerAccounts access token error, details:", e);
+            result = new CrmQueryResult();
+            result.setErrorCode(e.getCode());
+            result.setErrorMessage(e.getMessage());
+        }
+
+        return result;
+    }
 
 }
