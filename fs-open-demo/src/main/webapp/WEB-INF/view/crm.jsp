@@ -42,6 +42,7 @@
 
 		function getClientsHandler(result) {
 			console.log(result);
+			alert(JSON.stringify(result));
 			var json;
 			if (result.errorCode == 0) {
 				json = result.departments;
@@ -64,14 +65,14 @@
 				var url = getContextPath() + '/crm/getCustomerAccounts';
 				ajaxAsyncGet(url+"?" + $.param({
 					openUserId: openUserId
-				}), getClientsHandler);
+				}),null, getClientsHandler);
 			});
 
 			$("#btnClientV1").click(function () {
 				var url = getContextPath() + '/crm/getCustomerAccountsV1';
 				ajaxAsyncGet(url+"?" + $.param({
 					openUserId: openUserId
-				}), getClientsHandler);
+				}),null, getClientsHandler);
 			});
 		})
 
